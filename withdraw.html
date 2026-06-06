@@ -58,7 +58,16 @@ Submit Withdraw
 </div>
     <script>
 
-function submitWithdraw(){
+function submitWithdraw()
+{
+    await supabaseClient
+.from("withdraws")
+.insert({
+user_id: userId,
+amount: amount,
+method: method,
+number: number
+});
 
 let balance =
 parseFloat(localStorage.getItem("balance") || 0);
