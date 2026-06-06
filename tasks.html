@@ -17,12 +17,22 @@
     <p>Reward: ৳1</p>
     <button class="btn">Start Task</button>
 </div>
+    <input type="file" id="proofUpload">
+
+<button class="btn" onclick="submitTask()">
+📤 Submit Proof
+</button>
 
 <div class="balance-card">
     <h3>Subscribe YouTube Channel</h3>
     <p>Reward: ৳2</p>
     <button class="btn">Start Task</button>
 </div>
+    <input type="file" id="proofUpload">
+
+<button class="btn" onclick="submitTask()">
+📤 Submit Proof
+</button>
 
 </div>
 <div class="bottom-nav">
@@ -31,5 +41,47 @@
     <a href="refer.html">👥<br>Refer</a>
     <a href="withdraw.html">💸<br>Withdraw</a>
 </div>
+
+    <script>
+
+function submitTask(){
+    let tasks =
+parseInt(
+localStorage.getItem("tasks")
+|| 0
+);
+
+tasks++;
+
+localStorage.setItem(
+"tasks",
+tasks
+);
+
+let file =
+document.getElementById(
+"proofUpload"
+).files[0];
+
+if(!file){
+
+alert(
+"Please select a screenshot"
+);
+
+return;
+
+}
+
+alert(
+"Task Submitted Successfully"
+);
+
+}
+        if(localStorage.getItem("tasks")==null){
+localStorage.setItem("tasks","0");
+}
+
+</script>
 </body>
 </html>
