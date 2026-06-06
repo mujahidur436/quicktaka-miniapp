@@ -27,11 +27,11 @@
 
 <p>Your Referrals</p>
 
-<h2>0</h2>
+<h2 id="referrals">0</h2>
 
 <p>Your Earnings</p>
 
-<h2>৳0</h2>
+<h2 id="refEarnings">৳0</h2>
 
 </div>
 
@@ -108,6 +108,29 @@ alert(error);
 }
 
 }
+</script>
+    <script>
+
+if(localStorage.getItem("referrals")==null){
+localStorage.setItem("referrals","0");
+}
+
+function updateReferralData(){
+
+let referrals =
+localStorage.getItem("referrals");
+
+document.getElementById("referrals")
+.innerHTML = referrals;
+
+document.getElementById("refEarnings")
+.innerHTML =
+"৳" + referrals;
+
+}
+
+updateReferralData();
+
 </script>
 </body>
 </html>
