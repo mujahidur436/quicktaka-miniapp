@@ -13,8 +13,7 @@
 <h1>📋 Tasks</h1>
 
 <div class="balance-card">
-    <h3>Join Telegram Channel</h3>
-    <p>Reward: ৳1</p>
+    <div id="tasksContainer"></div>
     <button class="btn">Start Task</button>
 </div>
     <input type="file" id="proofUpload">
@@ -42,45 +41,63 @@
     <a href="withdraw.html">💸<br>Withdraw</a>
 </div>
 
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-function submitTask(){
-    let tasks =
-parseInt(
-localStorage.getItem("tasks")
-|| 0
+<script>
+
+const SUPABASE_URL =
+"https://gwrplydmjbdkheecnoqv.supabase.co";
+
+const SUPABASE_KEY =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3cnBseWRtamJka2hlZWNub3F2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NjA5MTcsImV4cCI6MjA5NjMzNjkxN30.dDFnqTHSDpt1pXSM-BU504jaB-OjLQAMmlMGsKnZVzo";
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
-tasks++;
+async function loadTasks(){
 
-localStorage.setItem(
-"tasks",
-tasks
-);
+const { data } =
+await supabaseClient
+.from("tasks")
+.select("*")
+.eq("status","active");
 
-let file =
+let html = "";
+
+data.forEach(task => {
+
+html += `
+<div class="balance-card">
+
+<h3>${task.title}</h3>
+
+<p>Reward: ৳${task.reward}</p>
+
+<a href="${task.link}"
+target="_blank">
+
+<button class="btn">
+Start Task
+</button>
+
+</a>
+
+</div>
+`;
+
+});
+
 document.getElementById(
-"proofUpload"
-).files[0];
-
-if(!file){
-
-alert(
-"Please select a screenshot"
-);
-
-return;
+"tasksContainer"
+).innerHTML = html;
 
 }
 
-alert(
-"Task Submitted Successfully"
-);
-
-}
-        if(localStorage.getItem("tasks")==null){
-localStorage.setItem("tasks","0");
-}
+loadTasks();
 
 </script>
 </body>
