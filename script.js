@@ -10,3 +10,9 @@ if(tg.initDataUnsafe.user){
     console.log("Name:", user.first_name);
 
 }
+if(tg.initDataUnsafe.user){
+
+    document.getElementById("username").innerHTML =
+    "👋 Welcome " + tg.initDataUnsafe.user.first_name;
+
+}
