@@ -35,3 +35,17 @@ balanceElement.innerHTML =
 }
 
 updateBalance();
+let taskCount =
+localStorage.getItem("tasks") || 0;
+
+let taskElement =
+document.getElementById(
+"taskCount"
+);
+
+if(taskElement){
+
+taskElement.innerHTML =
+taskCount;
+
+}
