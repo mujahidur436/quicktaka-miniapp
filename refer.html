@@ -35,8 +35,8 @@
 
 </div>
 
-<button class="btn" onclick="copyReferral()">
-📤 Copy Referral Link
+<button class="btn" onclick="testReferral()">
+🧪 Test Referral
 </button>
 
 </div>
@@ -48,6 +48,26 @@
 </div>
 
     <script>
+        function testReferral(){
+
+let referrals =
+parseInt(
+localStorage.getItem("referrals")
+|| 0
+);
+
+referrals++;
+
+localStorage.setItem(
+"referrals",
+referrals
+);
+
+updateReferralData();
+
+alert("Referral Added");
+
+}
 function copyReferral(){
 
 let userId =
