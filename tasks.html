@@ -47,6 +47,13 @@ SUPABASE_KEY
 );
 
 async function loadTasks(){
+    const { data, error } =
+await supabaseClient
+.from("tasks")
+.select("*")
+.eq("status","active");
+
+alert(JSON.stringify(data));
 
 const { data } =
 await supabaseClient
@@ -91,13 +98,7 @@ document.getElementById(
 }
 
 loadTasks();
-    const { data, error } =
-await supabaseClient
-.from("tasks")
-.select("*")
-.eq("status","active");
 
-alert(JSON.stringify(data));
 
 </script>
 </body>
