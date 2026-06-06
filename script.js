@@ -2,29 +2,36 @@ let tg = window.Telegram.WebApp;
 
 tg.expand();
 
-console.log(tg);
-
 if(tg.initDataUnsafe.user){
 
 let user = tg.initDataUnsafe.user;
 
-alert(
-"ID: " + user.id +
-"\nName: " + user.first_name
-);
+let username = document.getElementById("username");
 
-document.getElementById("username").innerHTML =
+if(username){
+username.innerHTML =
 "👋 Welcome " + user.first_name;
+}
 
 }
-else{
 
-alert("User Data Not Found");
+if(localStorage.getItem("balance") == null){
+localStorage.setItem("balance","0");
+}
+
+function updateBalance(){
+
+let balance =
+localStorage.getItem("balance");
+
+let balanceElement =
+document.getElementById("balance");
+
+if(balanceElement){
+balanceElement.innerHTML =
+"৳" + balance;
+}
 
 }
-let userId = tg.initDataUnsafe.user.id;
 
-let referralLink =
-"https://t.me/QuickTakaEarnBot?start=" + userId;
-
-console.log(referralLink);
+updateBalance();
