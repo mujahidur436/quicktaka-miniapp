@@ -43,7 +43,7 @@ style="width:100%;padding:10px;">
 
 <br><br>
 
-<button class="btn">
+<button class="btn" onclick="submitWithdraw()">
 Submit Withdraw
 </button>
 
@@ -56,5 +56,42 @@ Submit Withdraw
     <a href="refer.html">👥<br>Refer</a>
     <a href="withdraw.html">💸<br>Withdraw</a>
 </div>
+    <script>
+
+function submitWithdraw(){
+
+let balance =
+parseFloat(localStorage.getItem("balance") || 0);
+
+let amount =
+parseFloat(document.querySelector(
+'input[type="number"]'
+).value);
+
+if(balance < 20){
+
+alert(
+"Minimum balance is ৳20"
+);
+
+return;
+}
+
+if(amount > balance){
+
+alert(
+"Insufficient Balance"
+);
+
+return;
+}
+
+alert(
+"Withdraw Request Submitted"
+);
+
+}
+
+</script>
 </body>
 </html>
