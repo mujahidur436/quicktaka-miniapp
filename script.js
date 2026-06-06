@@ -1,1 +1,1 @@
-
+console.log("QuickTaka Loaded");
