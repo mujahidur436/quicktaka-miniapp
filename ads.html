@@ -51,5 +51,22 @@ function openAd(){
     <a href="refer.html">👥<br>Refer</a>
     <a href="withdraw.html">💸<br>Withdraw</a>
 </div>
+    <script>
+function claimReward(){
+
+let balance =
+parseFloat(localStorage.getItem("balance") || 0);
+
+balance += 0.05;
+
+localStorage.setItem(
+"balance",
+balance.toFixed(2)
+);
+
+alert("৳0.05 Added");
+
+}
+</script>
 </body>
 </html>
