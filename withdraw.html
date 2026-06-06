@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Withdraw</title>
 <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
@@ -56,44 +58,65 @@ Submit Withdraw
     <a href="refer.html">👥<br>Refer</a>
     <a href="withdraw.html">💸<br>Withdraw</a>
 </div>
-    <script>
+<script>
 
-function submitWithdraw()
-{
-    await supabaseClient
+const SUPABASE_URL =
+"https://gwrplydmjbdkheecnoqv.supabase.co";
+
+const SUPABASE_KEY =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3cnBseWRtamJka2hlZWNub3F2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NjA5MTcsImV4cCI6MjA5NjMzNjkxN30.dDFnqTHSDpt1pXSM-BU504jaB-OjLQAMmlMGsKnZVzo";
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+async function submitWithdraw(){
+
+const tg = window.Telegram.WebApp;
+
+const userId =
+tg.initDataUnsafe.user.id;
+
+const balance =
+parseFloat(
+localStorage.getItem("balance") || 0
+);
+
+const method =
+document.querySelector("select").value;
+
+const number =
+document.querySelector(
+'input[type="text"]'
+).value;
+
+const amount =
+parseFloat(
+document.querySelector(
+'input[type="number"]'
+).value
+);
+
+if(amount < 20){
+
+alert(
+"Minimum withdraw is ৳20"
+);
+
+return;
+
+}
+
+await supabaseClient
 .from("withdraws")
 .insert({
-user_id: userId,
-amount: amount,
-method: method,
-number: number
+user_id:userId,
+amount:amount,
+method:method,
+number:number
 });
-
-let balance =
-parseFloat(localStorage.getItem("balance") || 0);
-
-let amount =
-parseFloat(document.querySelector(
-'input[type="number"]'
-).value);
-
-if(balance < 20){
-
-alert(
-"Minimum balance is ৳20"
-);
-
-return;
-}
-
-if(amount > balance){
-
-alert(
-"Insufficient Balance"
-);
-
-return;
-}
 
 alert(
 "Withdraw Request Submitted"
