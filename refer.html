@@ -45,5 +45,21 @@
     <a href="refer.html">👥<br>Refer</a>
     <a href="withdraw.html">💸<br>Withdraw</a>
 </div>
+
+    <script>
+function copyReferral(){
+
+let userId =
+window.Telegram.WebApp.initDataUnsafe.user.id;
+
+let link =
+"https://t.me/QuickTakaEarnBot?start=" + userId;
+
+navigator.clipboard.writeText(link);
+
+alert("Referral Link Copied");
+
+}
+</script>
 </body>
 </html>
