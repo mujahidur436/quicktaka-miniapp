@@ -22,3 +22,9 @@ else{
 alert("User Data Not Found");
 
 }
+let userId = tg.initDataUnsafe.user.id;
+
+let referralLink =
+"https://t.me/QuickTakaEarnBot?start=" + userId;
+
+console.log(referralLink);
