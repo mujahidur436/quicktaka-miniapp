@@ -122,3 +122,27 @@ margin-bottom:5px;
 font-size:12px;
 color:#94a3b8;
 }
+.top-bar{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:20px;
+}
+
+.avatar{
+width:55px;
+height:55px;
+border-radius:50%;
+background:linear-gradient(135deg,#22c55e,#16a34a);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+font-size:20px;
+color:white;
+}
+
+.top-bar p{
+color:#94a3b8;
+font-size:13px;
+}
