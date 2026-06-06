@@ -2,17 +2,23 @@ let tg = window.Telegram.WebApp;
 
 tg.expand();
 
+console.log(tg);
+
 if(tg.initDataUnsafe.user){
 
-    let user = tg.initDataUnsafe.user;
+let user = tg.initDataUnsafe.user;
 
-    console.log("User ID:", user.id);
-    console.log("Name:", user.first_name);
+alert(
+"ID: " + user.id +
+"\nName: " + user.first_name
+);
+
+document.getElementById("username").innerHTML =
+"👋 Welcome " + user.first_name;
 
 }
-if(tg.initDataUnsafe.user){
+else{
 
-    document.getElementById("username").innerHTML =
-    "👋 Welcome " + tg.initDataUnsafe.user.first_name;
+alert("User Data Not Found");
 
 }
