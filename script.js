@@ -68,3 +68,6 @@ balanceElement.innerHTML =
 }
 
 loadUser();
+setInterval(() => {
+loadUser();
+}, 5000);
