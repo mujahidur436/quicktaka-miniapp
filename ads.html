@@ -17,9 +17,23 @@
     <h1>৳0.05</h1>
 </div>
 
-<button class="btn" onclick="openAd()">
-    🚀 Watch Ad
-</button>
+<script>
+function claimReward(){
+
+let balance =
+parseFloat(localStorage.getItem("balance") || 0);
+
+balance += 0.05;
+
+localStorage.setItem(
+"balance",
+balance.toFixed(2)
+);
+
+alert("৳0.05 Added");
+
+}
+</script>
 
 <p id="status"></p>
 
