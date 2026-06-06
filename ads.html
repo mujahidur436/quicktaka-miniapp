@@ -57,21 +57,53 @@ function openAd(){
     <a href="withdraw.html">💸<br>Withdraw</a>
 </div>
     <script>
-function claimReward(){
 
-let balance =
-parseFloat(localStorage.getItem("balance") || 0);
+const SUPABASE_URL =
+"https://gwrplydmjbdkheecnoqv.supabase.co";
 
-balance += 0.05;
+const SUPABASE_KEY =
+"YOUR_NEW_ANON_KEY";
 
-localStorage.setItem(
-"balance",
-balance.toFixed(2)
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
-alert("৳0.05 Added");
+async function claimReward(){
+
+const tg = window.Telegram.WebApp;
+
+const userId =
+tg.initDataUnsafe.user.id;
+
+const { data } =
+await supabaseClient
+.from("users")
+.select("balance")
+.eq("id", userId)
+.single();
+
+let currentBalance =
+Number(data.balance || 0);
+
+let newBalance =
+currentBalance + 0.05;
+
+await supabaseClient
+.from("users")
+.update({
+balance: newBalance
+})
+.eq("id", userId);
+
+alert(
+"৳0.05 Added\nNew Balance: ৳" +
+newBalance.toFixed(2)
+);
 
 }
+
 </script>
 </body>
 </html>
