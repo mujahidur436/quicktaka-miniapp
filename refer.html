@@ -62,10 +62,24 @@ alert("Referral Link Copied");
 
 }
 </script>
-    <script>
+  <script>
 function copyReferral(){
 
-alert("Button Clicked");
+const tg = window.Telegram?.WebApp;
+
+if(!tg){
+    alert("Please open inside Telegram");
+    return;
+}
+
+const userId = tg.initDataUnsafe.user.id;
+
+const link =
+"https://t.me/QuickTakaEarnBot?start=" + userId;
+
+navigator.clipboard.writeText(link);
+
+alert("Referral Link Copied");
 
 }
 </script>
