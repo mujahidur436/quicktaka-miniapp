@@ -91,6 +91,13 @@ document.getElementById(
 }
 
 loadTasks();
+    const { data, error } =
+await supabaseClient
+.from("tasks")
+.select("*")
+.eq("status","active");
+
+alert(JSON.stringify(data));
 
 </script>
 </body>
