@@ -118,8 +118,19 @@ alert(
 );
 
 loadSubmissions();
+const updateResult =
+await supabaseClient
+.from("task_submissions")
+.update({
+status:"approved",
+reward_added:true
+})
+.eq("id", submissionId)
+.select();
 
+alert(JSON.stringify(updateResult));
 }
+  
 
 </script>
 
