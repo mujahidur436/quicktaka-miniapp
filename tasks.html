@@ -95,7 +95,59 @@ document.getElementById(
 }
 
 loadTasks();
+    document.getElementById("tasksContainer").innerHTML = html;
 
+}
+
+loadTasks();
+    
+async function submitTask(taskId){
+
+const tg = window.Telegram.WebApp;
+
+const userId = tg.initDataUnsafe.user.id;
+
+const fileInput =
+document.getElementById("proof_" + taskId);
+
+const file = fileInput.files[0];
+
+if(!file){
+alert("Select Screenshot First");
+return;
+}
+
+const fileName =
+Date.now() + "-" + file.name;
+
+const { error: uploadError } =
+await supabaseClient.storage
+.from("proofs")
+.upload(fileName,file);
+
+if(uploadError){
+alert(uploadError.message);
+return;
+}
+
+const proofUrl =
+SUPABASE_URL +
+"/storage/v1/object/public/proofs/" +
+fileName;
+
+const result =
+await supabaseClient
+.from("task_submissions")
+.insert({
+user_id:userId,
+task_id:taskId,
+proof_url:proofUrl
+})
+.select();
+
+alert(JSON.stringify(result));
+
+}
     async function submitTask(taskId){
 
 const tg = window.Telegram.WebApp;
