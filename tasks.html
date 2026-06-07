@@ -57,11 +57,7 @@ await supabaseClient
 
 alert(JSON.stringify(data));
 
-const { data } =
-await supabaseClient
-.from("tasks")
-.select("*")
-.eq("status","active");
+
 
 let html = "";
 
