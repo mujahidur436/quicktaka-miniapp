@@ -71,6 +71,55 @@ document.getElementById(
 }
 
 loadSubmissions();
+  async function approveTask(submissionId){
+
+const { data: submission } =
+await supabaseClient
+.from("task_submissions")
+.select("*")
+.eq("id", submissionId)
+.single();
+
+const { data: task } =
+await supabaseClient
+.from("tasks")
+.select("*")
+.eq("id", submission.task_id)
+.single();
+
+const { data: user } =
+await supabaseClient
+.from("users")
+.select("*")
+.eq("id", submission.user_id)
+.single();
+
+const newBalance =
+Number(user.balance) +
+Number(task.reward);
+
+await supabaseClient
+.from("users")
+.update({
+balance:newBalance
+})
+.eq("id", submission.user_id);
+
+await supabaseClient
+.from("task_submissions")
+.update({
+status:"approved",
+reward_added:true
+})
+.eq("id", submissionId);
+
+alert(
+"Approved\nBalance Added"
+);
+
+loadSubmissions();
+
+}
 
 </script>
 
