@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="container">
+
+<h1>🛠 Admin Panel</h1>
+
+<div id="submissions"></div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+"https://gwrplydmjbdkheecnoqv.supabase.co";
+
+const SUPABASE_KEY =
+"YOUR_ANON_KEY";
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+async function loadSubmissions(){
+
+const { data } =
+await supabaseClient
+.from("task_submissions")
+.select("*")
+.eq("status","pending");
+
+let html = "";
+
+data.forEach(item => {
+
+html += `
+<div class="balance-card">
+
+<p>User ID: ${item.user_id}</p>
+
+<a href="${item.proof_url}" target="_blank">
+View Proof
+</a>
+
+<br><br>
+
+<button class="btn"
+onclick="approveTask(${item.id})">
+✅ Approve
+</button>
+
+</div>
+`;
+
+});
+
+document.getElementById(
+"submissions"
+).innerHTML = html;
+
+}
+
+loadSubmissions();
+
+</script>
+
+</body>
+</html>
