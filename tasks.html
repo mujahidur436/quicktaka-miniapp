@@ -47,6 +47,8 @@ SUPABASE_KEY
 );
 
 async function loadTasks(){
+    alert("loadTasks running");
+    
     const { data, error } =
 await supabaseClient
 .from("tasks")
